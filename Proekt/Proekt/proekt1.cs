@@ -70,6 +70,31 @@ namespace Proekt
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            
+
+        }
+        public proekt1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
             try
             {
                 hdd = new Harddrive<int>(Convert.ToInt32(textBox1.Text), Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), textBox4.Text, Convert.ToInt32(textBox5.Text), Convert.ToInt32(textBox9.Text));
@@ -81,25 +106,15 @@ namespace Proekt
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click_1(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click_1(object sender, EventArgs e)
         {
             gpu = new GPU<string>(Convert.ToInt32(textBox6.Text), Convert.ToInt32(textBox7.Text), Convert.ToInt32(textBox8.Text), textBox4.Text, Convert.ToInt32(textBox5.Text), textBox9.Text);
             listBox1.Items.Add(gpu.Display());
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            Application.Run(new proekt1());
-
-        }
-        public proekt1()
-        {
-            InitializeComponent();
         }
     }
 }
