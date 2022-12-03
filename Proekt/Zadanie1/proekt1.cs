@@ -15,7 +15,7 @@ namespace Proekt
 
         Harddrive<int> hdd;
         GPU<string> gpu;
-        abstract class accessories<T>
+        abstract class accessories<T> // создал абстрактный класс с обобщенным типом данных
         {
             public int price;
             public int realize;
@@ -32,7 +32,7 @@ namespace Proekt
 
             }
         }
-        class Harddrive<T> : accessories<T>
+        class Harddrive<T> : accessories<T> // наследнование классов
         {
             public int turnovers { set; get; }
             public string inter { set; get; }
@@ -97,6 +97,7 @@ namespace Proekt
         {
             try
             {
+                // кконвертирование текст боксов в нужный тип данных и вывод метода дисплей
                 hdd = new Harddrive<int>(Convert.ToInt32(textBox1.Text), Convert.ToInt32(textBox2.Text), Convert.ToInt32(textBox3.Text), textBox4.Text, Convert.ToInt32(textBox5.Text), Convert.ToInt32(textBox9.Text));
                 listBox1.Items.Add(hdd.Display());
             }
@@ -108,6 +109,7 @@ namespace Proekt
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            
             listBox1.Items.Clear();
         }
 

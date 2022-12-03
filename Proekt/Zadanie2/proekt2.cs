@@ -14,16 +14,16 @@ namespace Proekt
     public partial class proekt2 : Form
     {
         MySql sql;
-        MySqlConnection conn;
+        MySqlConnection conn;// открыл подключение
         class MySql
         {
-            string h = "chuc.caseum.ru";
+            string h = "chuc.caseum.ru";// задал данным для подключения переменные 
             string p = "33333";
             string u = "uchebka";
             string bd = "uchebka";
             string P = "uchebka";
             public string connStr;
-            public string con()
+            public string con() // метод возвращающий переменные 
             {
                 return connStr = $"server={h};port" +
                      $"={p};user={u};database={bd};password={P};";
