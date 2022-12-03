@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A3356195-1E15-4360-B643-306897B7765A}</ProjectGuid>
+    <ProjectGuid>{F9A85C56-ACF6-45A2-9CAF-2AE77870733D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Proekt</RootNamespace>
-    <AssemblyName>Proekt</AssemblyName>
+    <RootNamespace>Zadanie2</RootNamespace>
+    <AssemblyName>Zadanie2</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -84,16 +84,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Menu.cs">
+    <Compile Include="proekt2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menu.Designer.cs">
-      <DependentUpon>Menu.cs</DependentUpon>
+    <Compile Include="proekt2.Designer.cs">
+      <DependentUpon>proekt2.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Menu.resx">
-      <DependentUpon>Menu.cs</DependentUpon>
+    <EmbeddedResource Include="proekt2.resx">
+      <DependentUpon>proekt2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -117,20 +117,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Zadanie1\Zadanie1.csproj">
-      <Project>{6741c32a-7e71-44ff-ba59-712c6af69940}</Project>
-      <Name>Zadanie1</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zadanie2\Zadanie2.csproj">
-      <Project>{f9a85c56-acf6-45a2-9caf-2ae77870733d}</Project>
-      <Name>Zadanie2</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Zadanie3\Zadanie3.csproj">
-      <Project>{9185de04-274b-4f5c-a385-17cdf45b0113}</Project>
-      <Name>Zadanie3</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

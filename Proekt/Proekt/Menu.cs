@@ -19,7 +19,7 @@ namespace Proekt
 
         private void button1_Click(object sender, EventArgs e)
         {
-           proekt1  f2 = new proekt1();
+            proekt1 f2 = new proekt1();
             f2.Show();
         }
 
@@ -31,7 +31,8 @@ namespace Proekt
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            proekt3 f2 = new proekt3();
+            f2.Show();
         }
 
         private void Form1_Load(object sender, EventArgs e)
