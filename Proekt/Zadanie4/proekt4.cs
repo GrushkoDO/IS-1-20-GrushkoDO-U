@@ -55,21 +55,26 @@ namespace Zadanie4
 
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            conn.Open();
-            int rowIndex = e.RowIndex;
-            int conIndex = e.ColumnIndex;
-            DataGridViewRow row = dataGridView1.Rows[rowIndex];
-            if (conIndex == 1)
+            try// эта конструкция нужна чтобы при попытке сломать программу она крепко держалась 
             {
-                string com = $"SELECT photoUrl FROM t_datatime WHERE id = {row.Cells[conIndex - 1].Value.ToString()} ;";// вытаскиваю ссылку на картинку
-                MySqlCommand command = new MySqlCommand(com, conn);
-                MySqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())// цикл для повторного открытия или открытия картинок из других строк 
+                conn.Open();
+                int rowIndex = e.RowIndex;
+                int conIndex = e.ColumnIndex;
+                DataGridViewRow row = dataGridView1.Rows[rowIndex];
+                if (conIndex == 1)
                 {
-                    pictureBox1.ImageLocation = reader[0].ToString();// вытаскиваем картинку
+                    string com = $"SELECT photoUrl FROM t_datatime WHERE id = {row.Cells[conIndex - 1].Value.ToString()} ;";// вытаскиваю ссылку на картинку
+                    MySqlCommand command = new MySqlCommand(com, conn);
+                    MySqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())// цикл для повторного открытия или открытия картинок из других строк 
+                    {
+                        pictureBox1.ImageLocation = reader[0].ToString();// вытаскиваем картинку
+                    }
+                    conn.Close();
                 }
-                conn.Close();
             }
+            catch { }
+            finally { }
         }
     }
 }

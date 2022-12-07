@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Zadanie4;
+using Zadanie5;
 
 namespace Proekt
 {
@@ -45,6 +46,12 @@ namespace Proekt
         private void button4_Click(object sender, EventArgs e)
         {
             proekt4 f2 = new proekt4();
+            f2.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            proekt5 f2 = new proekt5();
             f2.Show();
         }
     }
