@@ -15,9 +15,9 @@ namespace Proekt
     {
         MySqlConnection conn;
         Connect f2 = new Connect();
-        private BindingSource bSource = new BindingSource();
+        private BindingSource bind = new BindingSource();
 
-        private MySqlDataAdapter MyDA = new MySqlDataAdapter();
+        private MySqlDataAdapter data = new MySqlDataAdapter();
 
         DataTable table = new DataTable();
         public proekt3()
@@ -35,18 +35,12 @@ namespace Proekt
 
             table.Clear();
             table.Columns.Clear();
-            string com = "SELECT Purchase_gasoline.purchase_gasoline_id,Purchase_gasoline.provider,Purchase_gasoline.purchase_price,Purchase_gasoline.purchase_volume,Purchase_gasoline.type_gasoline FROM Purchase_gasoline INNER JOIN Provider ON Purchase_gasoline.provider = Provider.provider_id ORDER BY Provider.provider_id";
+            string com = "SELECT Purchase_gasoline.purchase_gasoline_id,Purchase_gasoline.provider,Purchase_gasoline.purchase_price,Purchase_gasoline.purchase_volume,Purchase_gasoline.type_gasoline FROM Purchase_gasoline INNER JOIN Provider ON Purchase_gasoline.provider = Provider.provider_id ORDER BY Provider.provider_id";// запрос для проверки столбцов через иннер 
 
-            MyDA.SelectCommand = new MySqlCommand(com, conn);
-            dataGridView1.DataSource = bSource;
-            bSource.DataSource = table;
-            MyDA.Fill(table);
-
-            dataGridView1.Columns[0].ReadOnly = true;
-            dataGridView1.Columns[1].ReadOnly = true;
-            dataGridView1.Columns[2].ReadOnly = true;
-            dataGridView1.Columns[3].ReadOnly = true;
-            dataGridView1.Columns[4].ReadOnly = true;
+            data.SelectCommand = new MySqlCommand(com, conn);
+            dataGridView1.DataSource = bind;
+            bind.DataSource = table;
+            data.Fill(table);
 
             dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -55,6 +49,13 @@ namespace Proekt
             dataGridView1.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             dataGridView1.ColumnHeadersVisible = true;
+
+            dataGridView1.Columns[0].ReadOnly = true;
+            dataGridView1.Columns[1].ReadOnly = true;
+            dataGridView1.Columns[2].ReadOnly = true;
+            dataGridView1.Columns[3].ReadOnly = true;
+            dataGridView1.Columns[4].ReadOnly = true;
+
 
             conn.Close();
         }
@@ -70,7 +71,7 @@ namespace Proekt
             if (conIndex == 0)
             {
 
-                string con = $"SELECT * FROM Purchase_gasoline WHERE purchase_gasoline_id = {row.Cells[conIndex].Value.ToString()};";
+                string con = $"SELECT * FROM Purchase_gasoline WHERE purchase_gasoline_id = {row.Cells[conIndex].Value.ToString()};";// достаем все поля из сводной таблицы
                 MySqlCommand command = new MySqlCommand(con, conn);
                 MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
