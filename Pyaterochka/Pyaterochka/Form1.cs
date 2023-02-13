@@ -129,7 +129,7 @@ namespace Pyaterochka
             conn.Open();
             DateTime dt = DateTime.Now;
             dt = Convert.ToDateTime(dateTimePicker1.Value);
-            string update = $"INSERT Pyaterochka VALUES {textBox1.Text},{Convert.ToInt32(textBox2.Text)},\"{dt.ToString("yyyy-MM-dd")}\")";
+            string update = $"INSERT Pyaterochka VALUES ({b},\"{textBox1.Text}\",{Convert.ToInt32(textBox2.Text)},\"{dt.ToString("yyyy-MM-dd")}\")";
             MySqlCommand command = new MySqlCommand(update,conn);
             command.ExecuteNonQuery();
             conn.Close();
