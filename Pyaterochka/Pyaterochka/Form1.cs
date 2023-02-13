@@ -44,7 +44,6 @@ namespace Pyaterochka
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -70,28 +69,70 @@ namespace Pyaterochka
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int c = 0;
+            int a = 0;
+            int b = 0;
             try
             {
-                conn.Open();
-                string bd = $"SELECT MAX(ID) FROM Name;";
-                MySqlCommand cammandd = new MySqlCommand(bd, conn);
-                MySqlDataReader readerr = cammandd.ExecuteReader();
-                while (readerr.Read())
+                a = Convert.ToInt32(textBox5.Text);
+                b = Convert.ToInt32(textBox4.Text);
+            }
+            catch { }
+            if (b > 0 && a > 0)
+            {
+                a++;
+                for(int c=b; a<c;c++)
                 {
-                    c = Convert.ToInt32(readerr[0]);
+                    conn.Open();
+                    string del = $"SELECT * FROM Name WHERE ID = {c}";
+                    MySqlCommand command = new MySqlCommand(del, conn);
+                    command.ExecuteNonQuery();
+                    conn.Close();
                 }
             }
-            catch
-            {}
-            c++;
-            conn.Close();
-            conn.Open();
+            else if(b>0)
+            {
+                conn.Open();
+                string del = $"SELECT * FROM Name WHERE ID = {b}";
+                MySqlCommand command = new MySqlCommand(del, conn);
+                command.ExecuteNonQuery();
+                conn.Close();
+            }
+            else
+            {
+                MessageBox.Show("Диапазон не найден");
+            }
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int b = 0;
+            try
+            {
+                conn.Open();
+                string po = $"Select MAX(ID) FROM Name";
+                MySqlCommand com1 = new MySqlCommand(po,conn);
+                MySqlDataReader read1 = com1.ExecuteReader();
+                while (read1.Read())
+                {
+                    b = Convert.ToInt32(read1[0]);
+                }
+            }
+            catch { }
+            b++;
+            conn.Close();
+            conn.Open();
+            DateTime dt = DateTime.Now;
+            dt = Convert.ToDateTime(dateTimePicker1.Value);
+            string update = $"INSERT Pyaterochka VALUES {textBox1.Text},{Convert.ToInt32(textBox2.Text)},\"{dt.ToString("yyyy-MM-dd")}\")";
+            MySqlCommand command = new MySqlCommand(update,conn);
+            command.ExecuteNonQuery();
+            conn.Close();
         }
     }
 }
