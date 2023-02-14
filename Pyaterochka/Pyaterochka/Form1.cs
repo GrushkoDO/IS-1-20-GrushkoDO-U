@@ -31,15 +31,53 @@ namespace Pyaterochka
             }
 
         }
+        public void table1()
+        {
+            conn.Open();
+            table.Clear();
+            string j = "SELECT * FROM Pyaterochka";
+            data.SelectCommand = new MySqlCommand(j, conn);
+            dataGridView1.DataSource = bind;
+            bind.DataSource = table;
+            data.Fill(table);
+            dataGridView1.Columns[0].ReadOnly = true;
+            dataGridView1.Columns[1].ReadOnly = true;
+            dataGridView1.Columns[2].ReadOnly = true;
+            dataGridView1.Columns[3].ReadOnly = true;
+            dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.CurrentRow.Selected = false;
+            conn.Close();
+            int a = dataGridView1.Rows.Count;
+            a--;
+            DateTime date = new DateTime();
+            for (int b = 0; b < a; b++)
+            {
+                DataGridViewRow row = dataGridView1.Rows[b];
+                date = Convert.ToDateTime(row.Cells[3].Value);
+                date.ToString("yyyy-MM-dd");
+                if (date < DateTime.Today)
+                {
+                    row.DefaultCellStyle.BackColor = Color.Red;
+                }
+                else if (date == DateTime.Today || date == DateTime.Today.AddDays(1))
+                {
+                    row.DefaultCellStyle.BackColor = Color.Yellow;
+                }
+            }
 
-       
+        }
+
+
         public Form1()
         {
             InitializeComponent();
 
         }
-        
-        
+
+
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -60,6 +98,32 @@ namespace Pyaterochka
             bind.DataSource = table;
             data.Fill(table);
             conn.Close();
+            int a = dataGridView1.Rows.Count;
+            a--;
+            DateTime date = new DateTime();
+            for (int b = 0; b < a; b++)
+            {
+                DataGridViewRow row = dataGridView1.Rows[b];
+                date = Convert.ToDateTime(row.Cells[3].Value);
+                date.ToString("yyyy-MM-dd");
+                if (date < DateTime.Today)
+                {
+                    row.DefaultCellStyle.BackColor = Color.Red;
+                }
+                else if (date == DateTime.Today || date == DateTime.Today.AddDays(1))
+                {
+                    row.DefaultCellStyle.BackColor = Color.Yellow;
+                }
+            }
+            dataGridView1.Columns[0].ReadOnly = true;
+            dataGridView1.Columns[1].ReadOnly = true;
+            dataGridView1.Columns[2].ReadOnly = true;
+            dataGridView1.Columns[3].ReadOnly = true;
+            dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dataGridView1.CurrentRow.Selected = false;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -80,7 +144,7 @@ namespace Pyaterochka
             if (b > 0 && a > 0)
             {
                 a++;
-                for(int c=b; a<c;c++)
+                for (int c = b; a < c; c++)
                 {
                     conn.Open();
                     string del = $"SELECT * FROM Name WHERE ID = {c}";
@@ -89,7 +153,7 @@ namespace Pyaterochka
                     conn.Close();
                 }
             }
-            else if(b>0)
+            else if (b > 0)
             {
                 conn.Open();
                 string del = $"SELECT * FROM Name WHERE ID = {b}";
@@ -106,7 +170,7 @@ namespace Pyaterochka
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-           
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -115,8 +179,8 @@ namespace Pyaterochka
             try
             {
                 conn.Open();
-                string po = $"Select MAX(ID) FROM Name";
-                MySqlCommand com1 = new MySqlCommand(po,conn);
+                string po = $"Select MAX(ID) FROM Pyaterochka";
+                MySqlCommand com1 = new MySqlCommand(po, conn);
                 MySqlDataReader read1 = com1.ExecuteReader();
                 while (read1.Read())
                 {
@@ -130,9 +194,32 @@ namespace Pyaterochka
             DateTime dt = DateTime.Now;
             dt = Convert.ToDateTime(dateTimePicker1.Value);
             string update = $"INSERT Pyaterochka VALUES ({b},\"{textBox1.Text}\",{Convert.ToInt32(textBox2.Text)},\"{dt.ToString("yyyy-MM-dd")}\")";
-            MySqlCommand command = new MySqlCommand(update,conn);
+            MySqlCommand command = new MySqlCommand(update, conn);
             command.ExecuteNonQuery();
             conn.Close();
+            table1();
+
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                dataGridView1.Rows[i].Selected = false;
+                for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                    if (dataGridView1.Rows[i].Cells[j].Value != null)
+                        if (dataGridView1.Rows[i].Cells[j].Value.ToString().Contains(textBox6.Text))
+                        {
+                            dataGridView1.Rows[i].Selected = true;
+                            break;
+
+                        }
+                  }
+            }    
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
