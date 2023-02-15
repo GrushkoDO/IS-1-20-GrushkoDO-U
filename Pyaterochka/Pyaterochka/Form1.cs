@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Text.RegularExpressions;
 
 namespace Pyaterochka
 {
@@ -203,19 +204,24 @@ namespace Pyaterochka
 
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
-            for (int i = 0; i < dataGridView1.RowCount; i++)
+            dataGridView1.CurrentCell = null;
+            Regex reg = new Regex($@"{textBox6.Text}(\w*)");
+            int c = table.Rows.Count;
+            for (int a= 0; a < c; a++) 
             {
-                dataGridView1.Rows[i].Selected = false;
-                for (int j = 0; j < dataGridView1.ColumnCount; j++)
-                    if (dataGridView1.Rows[i].Cells[j].Value != null)
-                        if (dataGridView1.Rows[i].Cells[j].Value.ToString().Contains(textBox6.Text))
-                        {
-                            dataGridView1.Rows[i].Selected = true;
-                            break;
-
-                        }
-                  }
-            }    
+                DataGridViewRow r = dataGridView1.Rows[a];
+                string s = Convert.ToString(r.Cells[1].Value);
+                MatchCollection match = reg.Matches(s);
+                if (match.Count > 0)
+                {
+                    dataGridView1.Rows[1].Visible = true;
+                }
+                else
+                {
+                    dataGridView1.Rows[1].Visible = false;
+                }
+            }
+        }
 
         private void button3_Click(object sender, EventArgs e)
         {
